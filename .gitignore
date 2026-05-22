@@ -1,0 +1,45 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# Android
+android-sensor-app/build/
+android-sensor-app/app/build/
+android-sensor-app/.gradle/
+android-sensor-app/local.properties
+android-sensor-app/captures/
+*.apk
+*.aab
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+*.log
+
+# ROS2
+build/
+install/
+log/
+
+# Node / Web
+node_modules/
+web-viewer/dist/
+web-viewer/.next/
+*.tsbuildinfo
+
+# Données capturées (lourdes, jamais en git)
+data/
+*.bag
+*.pcd
+*.ply
