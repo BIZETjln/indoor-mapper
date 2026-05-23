@@ -4,7 +4,7 @@ App Android qui capture caméra + IMU et stream vers le PC backend en WebSocket.
 
 ## Stack
 
-- Kotlin 2.0+
+- Kotlin 2.0
 - Jetpack Compose
 - CameraX
 - OkHttp (WebSocket client)
@@ -14,30 +14,54 @@ App Android qui capture caméra + IMU et stream vers le PC backend en WebSocket.
 ## Prérequis
 
 - Android Studio Hedgehog (2023.1) ou plus récent
+- JDK 17
 - Téléphone Android 12+ (testé sur Xiaomi 15)
 - Mode développeur + débogage USB activés
 
-## Setup
+## Premier setup (à faire une fois)
+
+Le repo ne contient pas les fichiers binaires du wrapper Gradle (`gradle-wrapper.jar`, `gradlew`, `gradlew.bat`). Tu dois les générer la première fois :
+
+**Option A — depuis Android Studio (le plus simple)**
 
 1. Ouvrir le dossier `android-sensor-app/` dans Android Studio
-2. Sync Gradle (auto au premier ouvrage)
-3. Brancher le téléphone en USB
-4. Run
+2. Au prompt "Gradle Wrapper not found", clique **"Setup wrapper"** ou laisse Android Studio le générer automatiquement
+3. Sync Gradle
 
-## Configuration
+**Option B — en ligne de commande (si tu as Gradle installé localement)**
+
+```bash
+cd android-sensor-app
+gradle wrapper --gradle-version 8.7
+```
+
+Cela génère `gradlew`, `gradlew.bat`, et `gradle/wrapper/gradle-wrapper.jar`. Ensuite tu peux **commit ces fichiers** (sauf `gradle-wrapper.jar` qui est dans le `.gitignore` par convention sur certains projets, mais pour un projet perso garde-le, c'est plus simple).
+
+## Build & Run
+
+```bash
+./gradlew assembleDebug   # build l'APK
+./gradlew installDebug    # build + installe sur le device branché
+```
+
+Ou simplement le bouton ▶ dans Android Studio.
+
+## Configuration runtime
 
 Au premier lancement, l'app demande :
 - Permission caméra
-- L'IP du PC backend (par défaut tu peux mettre l'IP locale du PC, ex: `192.168.1.42`)
+- L'IP du PC backend (à entrer dans l'écran Settings, à implémenter en US-04)
 - Le port (par défaut `8765`)
 
-## Architecture interne
+## Architecture interne cible (à implémenter au fil des US)
 
 ```
-ui/             # Écrans Jetpack Compose
-sensors/        # Wrappers IMU et caméra
-network/        # Client WebSocket et sérialisation
-data/           # Modèles de données partagés
+app/src/main/java/com/julien/indoormapper/
+├── MainActivity.kt          # Point d'entrée (déjà créé)
+├── ui/                      # Écrans Jetpack Compose (US-01, US-02)
+├── sensors/                 # Wrappers IMU et caméra (US-01, US-02)
+├── network/                 # Client WebSocket et sérialisation (US-04)
+└── data/                    # Modèles de données partagés
 ```
 
 ## Notes pour Xiaomi 15

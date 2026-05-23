@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Permissions requises par l'app : -->
+    <!-- Caméra pour CameraX (US-02) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Internet pour le WebSocket vers le PC (US-04) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Accès à l'état du réseau (utile pour détecter wifi vs cellular) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Features hardware requises -->
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true" />
+
+    <application
+        android:label="Indoor Mapper"
+        android:theme="@style/Theme.IndoorMapper"
+        android:allowBackup="false"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="Indoor Mapper"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Thème de base pour Compose : on hérite de Material3, Compose gère le reste via le code. -->
+    <style name="Theme.IndoorMapper" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

@@ -16,6 +16,8 @@ android-sensor-app/local.properties
 android-sensor-app/captures/
 *.apk
 *.aab
+# Le wrapper Gradle (gradle-wrapper.jar) DOIT être committé pour que le projet
+# soit utilisable sans installer Gradle. On ne l'ignore PAS.
 
 # Python
 __pycache__/
@@ -26,6 +28,8 @@ __pycache__/
 .venv/
 venv/
 *.log
+.coverage
+htmlcov/
 
 # ROS2
 build/
@@ -36,7 +40,10 @@ log/
 node_modules/
 web-viewer/dist/
 web-viewer/.next/
+web-viewer/coverage/
 *.tsbuildinfo
+# package-lock.json DOIT être committé (utilisé par la CI et `npm ci`).
+# Ne pas l'ignorer.
 
 # Données capturées (lourdes, jamais en git)
 data/

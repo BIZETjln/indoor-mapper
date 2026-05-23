@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Indoor Mapper</string>
+    <string name="permission_camera_rationale">L\'app a besoin de la caméra pour capturer la pièce.</string>
+    <string name="status_connected">Connecté</string>
+    <string name="status_disconnected">Déconnecté</string>
+</resources>

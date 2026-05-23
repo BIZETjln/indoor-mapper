@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pc-slam-backend/requirements.txt
       - name: Install deps
         working-directory: pc-slam-backend
         run: pip install -r requirements.txt
@@ -24,7 +26,7 @@ jobs:
         run: python -m compileall src
       - name: Run tests
         working-directory: pc-slam-backend
-        run: pytest tests/ || echo "no tests yet"
+        run: pytest tests/ -v || echo "no tests yet"
 
   viewer:
     name: Web Viewer
@@ -35,11 +37,32 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          # Le cache npm utilise package-lock.json. Il doit donc être committé.
+          # Si tu n'as pas encore committé le lock file, supprime les 2 lignes suivantes.
           cache: npm
           cache-dependency-path: web-viewer/package-lock.json
       - name: Install deps
         working-directory: web-viewer
-        run: npm install
+        # `npm ci` est plus rapide et plus strict que `npm install` : il refuse
+        # de tourner si package-lock.json n'est pas synchronisé avec package.json.
+        run: npm ci
       - name: Build
         working-directory: web-viewer
         run: npm run build
+
+  android:
+    name: Android App
+    runs-on: ubuntu-latest
+    # Le job Android est désactivé tant que le wrapper Gradle n'est pas généré localement.
+    # Active-le en remplaçant `if: false` par `if: true` quand `gradlew` est committé.
+    if: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Build
+        working-directory: android-sensor-app
+        run: ./gradlew assembleDebug
